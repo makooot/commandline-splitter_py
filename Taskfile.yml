@@ -1,0 +1,76 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+
+# The task runner uses this file.
+# For information about the task runner, see the following URL:
+# https://taskfile.dev
+
+# Taskfile for a Python module development project
+# Requires for following tools:
+# - uv
+# - ruff
+# - nox
+# - ty
+
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - task: info
+    silent: true
+
+  info:
+    cmds:
+      - 'echo Taskfile: {{.TASKFILE}}'
+      - 'task -l -t {{.TASKFILE}}'
+    silent: true
+
+  taskfile-path:
+    cmds:
+      - 'echo {{.TASKFILE}}'
+    silent: true
+
+  lint:
+    desc: run linter
+    cmds:
+      - uv run ruff check
+
+  lint-fix:
+    desc: run linter and fix issues
+    cmds:
+      - uv run ruff check --fix
+
+  typecheck:
+    desc: run type checker
+    cmds:
+      - uv run ty check
+    aliases: [ ty ]
+
+  format:
+    desc: run formatter
+    cmds:
+      - uv run ruff format
+
+  build:
+    desc: build the package
+    cmds:
+      - uv build
+
+  test:
+    desc: run tests on the src
+    env:
+      UV_VENV_CLEAR: 1
+    cmds:
+      - uv run nox -s tests
+
+  test-package:
+    desc: run tests on the installed package
+    env:
+        UV_VENV_CLEAR: 1
+    cmds:
+      - uv run nox -s tests_package
+
+  update-project:
+    desc: update this project
+    cmds:
+      - uv sync
