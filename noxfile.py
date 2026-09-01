@@ -17,7 +17,7 @@ def tests_package(s: nox.Session) -> None:
     """session for testing the package"""
 
     # install the package
-    s.install("./dist/commandline-splitter-0.1.0-py3-none-any.whl")
+    s.install("./dist/commandline_splitter-0.1.0-py3-none-any.whl")
 
     # run the tests
-    s.run("python", "-m", "unittest", "discover", "-s", "test_package")
+    s.run("python", "-m", "unittest", "discover", "-s", "test")
