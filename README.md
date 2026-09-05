@@ -7,7 +7,11 @@ Split the command line like bash.
 
 ## Installation
 
-coming soon
+You can install this library locally (or from GitHub) using `pip`:
+
+```bash
+pip install git+https://github.com/makooot/commandline-splitter_py.git
+```
 
 ## Quick Start
 
